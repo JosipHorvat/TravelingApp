@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Form page</title>
+</head>
+<body>
+<h1>Add new tour</h1>
+
+<form action="#" th:action="@{/processForm}" th:object="${tour}" method="post">
+  <div>
+    <label>Name</label>
+    <input type="text" th:field="*{name}">
+  </div>
+
+  <div>
+    <label>Code</label>
+    <input type="text" th:field="*{code}">
+  </div>
+
+  <div>
+    <label>Continent</label>
+    <select name="continent">
+      <option th:each="continent : ${T(com.josip.travelagency.model.Tour.Continent).values()}"
+              th:value="${continent}" th:text="${continent}"></option>
+    </select>
+  </div>
+
+  <div>
+    <label>Start date</label>
+    <input type="date" th:field="*{date}">
+  </div>
+
+  <div>
+    <label>Tour duration</label>
+    <input type="number" th:field="*{duration}">
+  </div>
+
+  <div>
+    <label>All Inclusive</label>
+    <input type="checkbox" th:field="*{allInclusive}">
+  </div>
+
+  <div>
+    <input type="submit" value="Submit">
+  </div>
+</form>
+
+</body>
+</html>
