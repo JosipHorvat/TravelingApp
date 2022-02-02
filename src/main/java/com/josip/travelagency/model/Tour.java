@@ -5,7 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.*;
 import java.util.Date;
 
-public class Tour {
+@javax.persistence.Entity
+public class Tour extends Entity{
 
     @NotBlank(message = TOUR_NAME_NOT_NULL)
     @Size(min = 5, message = TOUR_STRING_SIZE)

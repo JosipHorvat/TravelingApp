@@ -4,52 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Form page</title>
+    <link rel="stylesheet" type="text/css" href="resources/main.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>Add new tour</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+        </div>
 
-<form action="#" method="post" th:action="@{/processForm}" th:object="${tour}">
-    <div>
-        <div style="color:red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
-        <label>Name</label>
-        <input th:field="*{name}" type="text">
+        <div class="col-sm">
+            <h1>Add new tour</h1>
+
+            <form action="#" th:action="@{/processForm}" th:object="${tour}" method="post">
+                <div class="form-group">
+                    <label>Name</label>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    <input type="text" th:field="*{name}">
+                </div>
+
+                <div class="form-group">
+                    <label>Code</label>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+                    <input type="text" th:field="*{code}">
+                </div>
+
+                <div class="form-group">
+                    <label>Continent</label>
+                    <select name="continent">
+                        <option th:each="continent : ${T(com.josip.travelagency.model.Tour.Continent).values()}"
+                                th:text="${continent}" th:value="${continent}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Start date</label>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+                    <input type="date" th:field="*{date}">
+                </div>
+
+                <div class="form-group">
+                    <label>Tour duration</label>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}"></div>
+                    <input type="number" th:field="*{duration}">
+                </div>
+
+                <div class="form-group">
+                    <label>All Inclusive</label>
+                    <input type="checkbox" th:field="*{allInclusive}">
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <input class="btn btn-success" type="submit" value="Submit">
+                    </div>
+                    <div class="col">
+                        <a th:href="@{/}" class="btn btn-warning float-right">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm">
+        </div>
     </div>
-
-    <div>
-        <div style="color:red" th:errors="*{code}" th:if="${#fields.hasErrors('code')}"></div>
-        <label>Code</label>
-        <input th:field="*{code}" type="text">
-    </div>
-
-    <div>
-        <label>Continent</label>
-        <select name="continent">
-            <option th:each="continent : ${T(com.josip.travelagency.model.Tour.Continent).values()}"
-                    th:text="${continent}" th:value="${continent}"></option>
-        </select>
-    </div>
-
-    <div>
-        <div style="color:red" th:errors="*{date}" th:if="${#fields.hasErrors('date')}"></div>
-        <label>Start date</label>
-        <input th:field="*{date}" type="date">
-    </div>
-
-    <div>
-        <div style="color:red" th:errors="*{duration}" th:if="${#fields.hasErrors('duration')}"></div>
-        <label>Tour duration</label>
-        <input th:field="*{duration}" type="number">
-    </div>
-
-    <div>
-        <label>All Inclusive</label>
-        <input th:field="*{allInclusive}" type="checkbox">
-    </div>
-
-    <div>
-        <input type="submit" value="Submit">
-    </div>
-</form>
-
+</div>
 </body>
 </html>
