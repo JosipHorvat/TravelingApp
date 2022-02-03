@@ -2,6 +2,9 @@ package com.josip.travelagency.model;
 import static com.josip.travelagency.constants.TourErrorMessage.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.*;
 import java.util.Date;
 
@@ -12,6 +15,10 @@ public class Tour extends MainEntity{
 
     public Tour (){
     }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tour_details_id")
+    private TourDetails tourDetails;
+
 
     @NotBlank(message = TOUR_NAME_NOT_NULL)
     @Size(min = 5, message = TOUR_STRING_SIZE)
@@ -76,8 +83,16 @@ public class Tour extends MainEntity{
         this.allInclusive = allInclusive;
     }
 
+    public TourDetails getTourDetails() {
+        return tourDetails;
+    }
+
+    public void setTourDetails(TourDetails tourDetails) {
+        this.tourDetails = tourDetails;
+    }
+
     public enum Continent {
-        AFRICA, ASIA, EUROPE, NORTH_AMERICA, SOUTH_AMERICA;
+        AFRICA, ASIA, EUROPE, NORTH_AMERICA, SOUTH_AMERICA, AUSTRALIA;
     }
 
 
