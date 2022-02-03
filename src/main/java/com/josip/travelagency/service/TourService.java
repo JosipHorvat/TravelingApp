@@ -14,4 +14,6 @@ public interface TourService {
 
     void delete(long id);
 
+    void addTourDetailsIfNotExists(Tour tour);
+
 }

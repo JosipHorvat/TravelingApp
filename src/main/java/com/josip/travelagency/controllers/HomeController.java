@@ -12,5 +12,4 @@ public class HomeController {
         return "home";
     }
 
-// TODO: 02/02/2022  model TourDetails-> one to one with tour, service repo controller. HTML : form tour-details and tourdetails
 }

@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 public class Tour extends MainEntity{
 
     public Tour (){
+        new TourDetails();
     }
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tour_details_id")

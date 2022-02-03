@@ -1,6 +1,7 @@
 package com.josip.travelagency.service;
 
 import com.josip.travelagency.model.Tour;
+import com.josip.travelagency.model.TourDetails;
 import com.josip.travelagency.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,14 @@ public class TourServiceImpl implements TourService{
     @Override
     public void delete(long id) {
         tourRepository.deleteById(id);
+    }
+
+    @Override
+    public void addTourDetailsIfNotExists(Tour tour) {
+        if(tour.getTourDetails() == null) {
+            tour.setTourDetails(new TourDetails());
+            saveOrUpdate(tour);
+        }
     }
 
 }
