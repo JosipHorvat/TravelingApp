@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface TourService {
 
-    public List<Tour> getAll();
+    List<Tour> getAll();
 
-    public Tour getById(int id);
+    Tour getById(long id);
 
-    public void saveOrUpdate(Tour tour);
+    void saveOrUpdate(Tour tour);
 
-    public void delete(int id);
+    void delete(long id);
 
 }

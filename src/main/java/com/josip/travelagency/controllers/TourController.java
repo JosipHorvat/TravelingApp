@@ -23,6 +23,7 @@ public class TourController {
     @GetMapping("/addTour")
     public String showForm(Model model) {
         model.addAttribute("tour", new Tour());
+        System.out.println("ovo mi se pozvalo");
         return "form";
     }
 
@@ -43,7 +44,7 @@ public class TourController {
     }
 
     @GetMapping("/deleteTour/{id}")
-    public String deleteTour(@PathVariable int id) {
+    public String deleteTour(@PathVariable long id) {
         Tour tour = tourService.getById(id);
         if(tour != null) {
             tourService.delete(id);
@@ -52,7 +53,7 @@ public class TourController {
     }
 
     @GetMapping("/editTour/{id}")
-    public String editTour(@PathVariable int id, Model model) {
+    public String editTour(@PathVariable long id, Model model) {
         Tour tour = tourService.getById(id);
         if(tour != null) {
             model.addAttribute("tour", tour);

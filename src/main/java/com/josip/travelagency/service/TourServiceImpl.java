@@ -5,9 +5,11 @@ import com.josip.travelagency.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class TourServiceImpl implements TourService{
 
     @Autowired
@@ -19,7 +21,7 @@ public class TourServiceImpl implements TourService{
     }
 
     @Override
-    public Tour getById(int id) {
+    public Tour getById(long id) {
         return tourRepository.getById(id);
     }
 
@@ -29,7 +31,7 @@ public class TourServiceImpl implements TourService{
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         tourRepository.deleteById(id);
     }
 
