@@ -36,12 +36,5 @@ public class TourServiceImpl implements TourService{
         tourRepository.deleteById(id);
     }
 
-    @Override
-    public void addTourDetailsIfNotExists(Tour tour) {
-        if(tour.getTourDetails() == null) {
-            tour.setTourDetails(new TourDetails());
-            saveOrUpdate(tour);
-        }
-    }
 
 }
