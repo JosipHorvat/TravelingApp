@@ -30,6 +30,7 @@
                 <th scope="col">Edit Details</th>
                 <th scope="col">Remove</th>
                 <th scope="col">Details</th>
+                <th scope="col">Sign in</th>
             </tr>
             </thead>
             <tbody>
@@ -45,6 +46,10 @@
                 <td><a class="btn btn-primary" th:href="@{/editTourDetails/} + ${tour.id}">Edit Details</a></td>
                 <td><a class="btn btn-danger" th:href="@{/deleteTour/} + ${tour.id}">Delete</a></td>
                 <td><a class="btn btn-success" th:href="@{/showTourDetails/} + ${tour.id}">Details</a></td>
+                <td>
+                    <a class="btn btn-success" th:href="@{/addUserToTour/{id}/{userId}(id=${tour.id}, userId=1)}">1</a>
+                    <a class="btn btn-success" th:href="@{/addUserToTour/{id}/{userId}(id=${tour.id}, userId=2)}">2</a>
+                    </td>
             </tr>
             </tbody>
         </table>

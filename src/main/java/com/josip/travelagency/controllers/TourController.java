@@ -61,4 +61,19 @@ public class TourController {
         }
         return "redirect:/showOffer";
     }
+
+    @GetMapping("/addUserToTour/{id}/{userId}")
+    public String addUserToTour(@PathVariable long id, @PathVariable long userId){
+        tourService.addUserToTour(id, userId);
+        return "redirect:/showOffer";
+    }
+
+    /*
+    Users are hardcoded for now. To make app work you need to insert 2 users in database using query:
+
+    insert into traveling_agency.user(id, login) values(1, 'Josip');
+    insert into traveling_agency.user(id, login) values(2, 'Mile');
+
+    In html page there are 2 "user" buttons. Button 1 represents user 1, and button 2 user 2;
+     */
 }

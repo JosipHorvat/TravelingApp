@@ -36,6 +36,20 @@ public class Tour extends MainEntity{
     private int duration;
     private boolean allInclusive = false;
 
+    @ManyToMany
+    @JoinTable(name = "tour2user",
+            joinColumns = @JoinColumn(name = "tour_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<TAUser> users;
+
+    public List<TAUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<TAUser> users) {
+        this.users = users;
+    }
+
     public String getName() {
         return name;
     }
