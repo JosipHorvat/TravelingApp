@@ -23,7 +23,6 @@ public class TourController {
     @GetMapping("/addTour")
     public String showForm(Model model) {
         model.addAttribute("tour", new Tour());
-        System.out.println("ovo mi se pozvalo");
         return "form";
     }
 
