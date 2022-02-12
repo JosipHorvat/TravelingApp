@@ -9,6 +9,13 @@ public class TAUser extends MainEntity{
 
     private String login;
 
+    @Column(length = 68)
+    private String password;
+
+    private boolean enabled;
+
+
+
     @ManyToMany
     @JoinTable(name = "tour2user",
              joinColumns = @JoinColumn(name = "user_id"),
@@ -29,5 +36,21 @@ public class TAUser extends MainEntity{
 
     public void setTours(List<Tour> tours) {
         this.tours = tours;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

@@ -1,6 +1,7 @@
 package com.josip.travelagency.security;
 
 import com.josip.travelagency.config.TourAgencyAccessDeniedHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -27,15 +30,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new TourAgencyAccessDeniedHandler();
     }
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("Josip").password(passwordEncoder().encode("admin")).roles("ADMIN", "EMPLOYEE")
-                .and()
-                .withUser("Mile").password(passwordEncoder().encode("employee")).roles("EMPLOYEE")
-                .and()
-                .withUser("Pavo").password(passwordEncoder().encode("client")).roles("CLIENT");
+                .jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select login, password, enabled from user where login=?")
+                .authoritiesByUsernameQuery("select login, role from role where login=?");
+
     }
 
     @Override
