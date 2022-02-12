@@ -2,7 +2,6 @@ package com.josip.travelagency.service;
 
 import com.josip.travelagency.model.TAUser;
 import com.josip.travelagency.model.Tour;
-import com.josip.travelagency.model.TourDetails;
 import com.josip.travelagency.repository.TAUserRepository;
 import com.josip.travelagency.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;

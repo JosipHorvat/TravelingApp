@@ -12,9 +12,10 @@ public class TAUser extends MainEntity{
     @Column(length = 68)
     private String password;
 
+    @Transient//means it won't be saved in db
+    private String confirmedPassword;
+
     private boolean enabled;
-
-
 
     @ManyToMany
     @JoinTable(name = "tour2user",
@@ -52,5 +53,13 @@ public class TAUser extends MainEntity{
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getConfirmedPassword() {
+        return confirmedPassword;
+    }
+
+    public void setConfirmedPassword(String confirmedPassword) {
+        this.confirmedPassword = confirmedPassword;
     }
 }
