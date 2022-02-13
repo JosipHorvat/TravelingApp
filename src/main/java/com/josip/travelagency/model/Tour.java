@@ -20,6 +20,9 @@ public class Tour extends MainEntity{
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
+    @OneToMany( cascade = CascadeType.ALL,  orphanRemoval = true)
+    private List<Image> images;
+
 
     @NotBlank(message = TOUR_NAME_NOT_NULL)
     @Size(min = 5, message = TOUR_STRING_SIZE)
@@ -112,6 +115,14 @@ public class Tour extends MainEntity{
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public enum Continent {
