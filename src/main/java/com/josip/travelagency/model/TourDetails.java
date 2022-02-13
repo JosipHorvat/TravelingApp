@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.OneToOne;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tour_details")
 public class TourDetails extends MainEntity{
@@ -21,16 +25,4 @@ public class TourDetails extends MainEntity{
 	private Tour tour;
 	 */
 
-    public String getCountry() {
-        return country;
-    }
-    public void setCountry(String country) {
-        this.country = country;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

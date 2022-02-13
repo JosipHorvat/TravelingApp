@@ -4,6 +4,11 @@ package com.josip.travelagency.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class MainEntity implements Serializable {
 
@@ -12,12 +17,5 @@ public abstract class MainEntity implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

@@ -7,8 +7,17 @@ import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class Tour extends MainEntity{
+
+    public enum Continent {
+        AFRICA, ASIA, EUROPE, NORTH_AMERICA, SOUTH_AMERICA, AUSTRALIA;
+    }
 
     public Tour (){
        setTourDetails(new TourDetails());
@@ -44,90 +53,5 @@ public class Tour extends MainEntity{
             joinColumns = @JoinColumn(name = "tour_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<TAUser> users;
-
-    public List<TAUser> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<TAUser> users) {
-        this.users = users;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Continent getContinent() {
-        return continent;
-    }
-
-    public void setContinent(Continent continent) {
-        this.continent = continent;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public boolean isAllInclusive() {
-        return allInclusive;
-    }
-
-    public void setAllInclusive(boolean allInclusive) {
-        this.allInclusive = allInclusive;
-    }
-
-    public TourDetails getTourDetails() {
-        return tourDetails;
-    }
-
-    public void setTourDetails(TourDetails tourDetails) {
-        this.tourDetails = tourDetails;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
-    public enum Continent {
-        AFRICA, ASIA, EUROPE, NORTH_AMERICA, SOUTH_AMERICA, AUSTRALIA;
-    }
-
 
 }
