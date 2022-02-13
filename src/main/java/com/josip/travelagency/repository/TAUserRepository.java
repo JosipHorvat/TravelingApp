@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface TAUserRepository extends JpaRepository<TAUser, Long> {
 
      boolean existsByLogin(String login);
+
+    TAUser findByLogin(String login);
 }

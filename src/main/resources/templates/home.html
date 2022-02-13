@@ -14,30 +14,21 @@
 <div class="container">
     <h1>Welcome to our travel agency</h1>
 
-    <a th:href="@{/addTour}" class="btn btn-primary">Add a new tour</a>
+    <a sec:authorize="hasRole('EMPLOYEE')" th:href="@{/addTour}" class="btn btn-primary">Add a new tour</a>
     <a th:href="@{/showOffer}" class="btn btn-primary">Show our offer</a>
-    <a th:href="@{/addComment}" class="btn btn-primary">Add comment</a>
+    <a sec:authorize="hasRole('CLIENT')" th:href="@{/addComment}" class="btn btn-primary">Add comment</a>
     <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-secondary float-right">Login</a>
     <a sec:authorize="!isAnonymous()" th:href="@{/logout}" class="btn btn-secondary float-right">Logout</a>
 
     <br>
     <br>
-    <div class="border border-success">
-        <p>Spring security examples</p>
-        <div class="bg-primary text-white" sec:authorize="hasRole('ADMIN')">This part is visible to the admin</div>
-        <div class="bg-secondary text-white" sec:authorize="hasRole('EMPLOYEE')">This part is visible to the employee</div>
-        <div class="bg-warning text-black" sec:authorize="hasRole('CLIENT')">This part is visible to the client</div>
-        <div class="bg-info text-white" sec:authorize="isAuthenticated()">This part is visible only to authenticated users</div>
 
-        <div>
-            Username: <span sec:authentication="name"></span>
-        </div>
-        <div>
-            User roles: <span sec:authorize="isAuthenticated()">
-					<span sec:authentication="principal.authorities"></span>
-					</span>
-        </div>
-    </div>
+    <h1>Hello <span sec:authorize="isAuthenticated()">
+								<span sec:authentication="name"></span>
+							</span>
+        <span sec:authorize="isAnonymous()">dear guest</span>
+    </h1>
+    <h2>Welcome to our travel agency</h2>
 
 </div>
 </body>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Tours page</title>
@@ -26,11 +27,11 @@
                 <th scope="col">Date</th>
                 <th scope="col">Duration</th>
                 <th scope="col">All Inclusive</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Edit Details</th>
-                <th scope="col">Remove</th>
+                <th sec:authorize="hasRole('EMPLOYEE')" scope="col">Edit</th>
+                <th sec:authorize="hasRole('EMPLOYEE')" scope="col">Edit details</th>
+                <th sec:authorize="hasRole('ADMIN')" scope="col">Remove</th>
                 <th scope="col">Details</th>
-                <th scope="col">Sign in</th>
+                <th sec:authorize="hasRole('CLIENT')" scope="col">Sign in</th>
             </tr>
             </thead>
             <tbody>
@@ -41,15 +42,12 @@
                 <td th:text="${tour.continent}"></td>
                 <td th:text="${#dates.format(tour.date, 'yyyy-MM-dd')}"></td>
                 <td th:text="${tour.duration}"></td>
-                <td th:text="${tour.allInclusive}"></td>
-                <td><a class="btn btn-primary" th:href="@{/editTour/} + ${tour.id}">Edit</a></td>
-                <td><a class="btn btn-primary" th:href="@{/editTourDetails/} + ${tour.id}">Edit Details</a></td>
-                <td><a class="btn btn-danger" th:href="@{/deleteTour/} + ${tour.id}">Delete</a></td>
+                <td th:text="${tour.allInclusive} ? 'yes' : 'no'"></td>
+                <td sec:authorize="hasRole('EMPLOYEE')"><a class="btn btn-primary" th:href="@{/editTour/} + ${tour.id}">Edit</a></td>
+                <td sec:authorize="hasRole('EMPLOYEE')"><a class="btn btn-primary" th:href="@{/editTourDetails/} + ${tour.id}">Edit details</a></td>
+                <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/deleteTour/} + ${tour.id}">Delete</a></td>
                 <td><a class="btn btn-success" th:href="@{/showTourDetails/} + ${tour.id}">Details</a></td>
-                <td>
-                    <a class="btn btn-success" th:href="@{/addUserToTour/{id}/{userId}(id=${tour.id}, userId=1)}">1</a>
-                    <a class="btn btn-success" th:href="@{/addUserToTour/{id}/{userId}(id=${tour.id}, userId=2)}">2</a>
-                    </td>
+                <td sec:authorize="hasRole('CLIENT')"><a class="btn btn-success" th:href="@{/addUserToTour/} + ${tour.id}">Sign in</a></td>
             </tr>
             </tbody>
         </table>

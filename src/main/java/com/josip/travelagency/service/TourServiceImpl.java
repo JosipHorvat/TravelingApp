@@ -42,13 +42,13 @@ public class TourServiceImpl implements TourService{
     }
 
     @Override
-    public void addUserToTour(long id, long userId) {
+    public void addUserToTour(long id, String login) {
         Tour tour = getById(id);
         if(tour.getUsers() == null){
             tour.setUsers(new ArrayList<>());
         }
 
-        TAUser user = userRepository.getById(userId);
+        TAUser user = userRepository.findByLogin(login);
         if(user != null){
             tour.getUsers().add(user);
             saveOrUpdate(tour);
