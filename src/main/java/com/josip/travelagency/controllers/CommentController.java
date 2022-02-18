@@ -27,7 +27,7 @@ public class CommentController {
         List<Tour> tours = tourService.getAll();
         model.addAttribute("tours", tours);
         model.addAttribute("comment", new Comment());
-        return "form-comment";
+        return "comment/form-comment";
     }
 
     @PostMapping("/processFormComment")

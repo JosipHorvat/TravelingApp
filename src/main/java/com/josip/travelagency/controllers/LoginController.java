@@ -19,18 +19,18 @@ public class LoginController {
 
     @RequestMapping("login")
     public String showLoginPage(){
-        return "login";
+        return "signup-login/login";
     }
 
     @RequestMapping("forbidden")
     public String showForbiddenError(){
-        return "403";
+        return "forbidden-page/403";
     }
 
     @GetMapping("/signup")
     public String signup(Model model){
         model.addAttribute("user", new TAUser());
-        return "form-signup";
+        return "signup-login/form-signup";
     }
 
     @PostMapping("processSignup")
@@ -51,7 +51,7 @@ public class LoginController {
         }
 
         userService.createNewAccount(user);
-        return "login";
+        return "signup-login/login";
     }
 
     @PostMapping("/checkUserAccount")

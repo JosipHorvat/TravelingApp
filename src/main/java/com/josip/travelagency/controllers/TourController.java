@@ -24,13 +24,13 @@ public class TourController {
     @GetMapping("/addTour")
     public String showForm(Model model) {
         model.addAttribute("tour", new Tour());
-        return "form";
+        return "tour/tour-form";
     }
 
     @PostMapping("/processForm")
     public String showTourData(@Valid @ModelAttribute Tour tour, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "form";
+            return "tour/tour-form";
         }
         tourService.saveOrUpdate(tour);
         return "redirect:showOffer";
@@ -40,7 +40,7 @@ public class TourController {
     public String getTours(Model model) {
         List<Tour> tours = tourService.getAll();
         model.addAttribute("tours", tours);
-        return "tours";
+        return "tour/tours";
     }
 
     @GetMapping("/deleteTour/{id}")
@@ -57,7 +57,7 @@ public class TourController {
         Tour tour = tourService.getById(id);
         if(tour != null) {
             model.addAttribute("tour", tour);
-            return "form";
+            return "tour/tour-form";
         }
         return "redirect:/showOffer";
     }

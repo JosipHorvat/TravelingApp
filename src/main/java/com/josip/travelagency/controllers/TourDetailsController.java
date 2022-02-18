@@ -27,7 +27,7 @@ public class TourDetailsController {
         Tour tour = tourService.getById(tourId);
         if(tour != null) {
             model.addAttribute("tour", tour);
-            return "tour-details";
+            return "tour-details/tour-details";
         }
         return "redirect:/showOffer";
     }
@@ -38,7 +38,7 @@ public class TourDetailsController {
         Tour tour = tourService.getById(tourId);
         if(tour != null) {
             model.addAttribute("tourDetails", tour.getTourDetails());
-            return "form-tour-details";
+            return "tour-details/form-tour-details";
         }
         return "redirect:/showOffer";
     }

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +38,7 @@ public class ImageController {
 
     @GetMapping(value = {"/image-home"})
     public String addProductPage() {
-        return "index";
+        return "image/image-form";
     }
 
     @PostMapping("/image/saveImageDetails")
@@ -104,7 +103,7 @@ public class ImageController {
                     model.addAttribute("id", image.get().getId());
                     model.addAttribute("description", image.get().getDescription());
                     model.addAttribute("name", image.get().getName());
-                    return "imagedetails";
+                    return "image/imagedetails";
                 }
                 return "redirect:/showOffer";
             }
@@ -119,8 +118,7 @@ public class ImageController {
     String show(Model map) {
         List<Image> images = imageRepository.findAll();
         map.addAttribute("images", images);
-        return "images";
+        return "image/images";
     }
 }
 
-//popravit endpointove, nakon toga urediti foldere kao u travel agency
