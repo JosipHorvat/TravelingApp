@@ -3,18 +3,22 @@ package com.josip.travelagency.model;
 import javax.persistence.*;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Arrays;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "image")
 public class Image extends MainEntity{
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Lob
@@ -22,4 +26,12 @@ public class Image extends MainEntity{
     private byte[] image;
 
 
+    @Override
+    public String toString() {
+        return "Image{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", image=" + Arrays.toString(image) +
+                '}';
+    }
 }

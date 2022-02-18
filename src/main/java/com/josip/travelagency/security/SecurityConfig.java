@@ -35,24 +35,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//                .jdbcAuthentication().dataSource(dataSource)
+//                .usersByUsernameQuery("select login, password, enabled from user where login=?")
+//                .authoritiesByUsernameQuery("select login, role from role where login=?");
         auth
-                .jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select login, password, enabled from user where login=?")
-                .authoritiesByUsernameQuery("select login, role from role where login=?");
-
+                .inMemoryAuthentication()
+                .withUser("Josip").password(passwordEncoder().encode("admin")).roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/", "/login")
-                    .permitAll()
-                .antMatchers("/addTour", "/editTour")
-                    .hasAnyRole("EMPLOYEE")
-                .antMatchers("/deleteTour")
-                    .hasAnyRole("ADMIN")
-                .antMatchers("/addComment", "/addUserToTour")
-                    .hasAnyRole("CLIENT")
+        http.//authorizeRequests()
+                csrf()
+                .disable()
+                .authorizeRequests()
+                .anyRequest().permitAll()//authenticated();
+
+//                .antMatchers("/", "/login")
+//                    .permitAll()
+//                .antMatchers("/addTour", "/editTour")
+//                    .hasAnyRole("ADMIN, EMPLOYEE")
+//                .antMatchers("/deleteTour", "/image/*")
+//                    .hasAnyRole("ADMIN")
+//                .antMatchers("/addComment", "/addUserToTour")
+//                    .hasAnyRole("CLIENT")
                 .and()
                     .formLogin()
                     .loginPage("/login")
@@ -65,8 +72,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/")
                     .invalidateHttpSession(true)
                     .permitAll()
-              .and()
+             .and()
                    // .exceptionHandling().accessDeniedPage("/forbidden");
-                    .exceptionHandling().accessDeniedHandler(accessDeniedHandler());// 2nd way of access denied page
+                   .exceptionHandling().accessDeniedHandler(accessDeniedHandler());// 2nd way of access denied page
     }
+
+
+
 }

@@ -53,4 +53,9 @@ public class LoginController {
         userService.createNewAccount(user);
         return "login";
     }
+
+    @PostMapping("/checkUserAccount")
+    public String login(){
+        return "/";
+    }
 }
