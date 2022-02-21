@@ -1,5 +1,7 @@
 package com.josip.travelagency.model;
 import static com.josip.travelagency.constants.TourErrorMessage.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -29,9 +31,11 @@ public class Tour extends MainEntity{
     @JoinColumn(name = "tour_details_id")
     private TourDetails tourDetails;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<Image> images;
 
