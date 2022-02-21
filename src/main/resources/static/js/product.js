@@ -2,6 +2,8 @@ $(document).ready(function() {
     $('#loader').hide();
     $("#submit").on("click", function() {
         $("#submit").prop("disabled", true);
+
+        var tour = $("#tour").val();
         var name = $("#name").val();
         var file = $("#image").val();
         var description = $("#description").val();
@@ -9,19 +11,22 @@ $(document).ready(function() {
         var data = new FormData($("#form")[0]);
         data.append('name', name);
         data.append('description', description);
+        data.append("tour", tour)
         //alert(data);
         $('#loader').show();
-        if (name === "" || file === ""  || description === "") {
+        if (name === "" || file === ""  || description === "" || tour === "") {
             $("#submit").prop("disabled", false);
             $('#loader').hide();
             $("#name").css("border-color", "red");
             $("#image").css("border-color", "red");
+            $("#tour").css("border-color", "red");
             $("#description").css("border-color", "red");
             $("#error_name").html("Please fill the required field.");
             $("#error_file").html("Please fill the required field.");
             $("#error_description").html("Please fill the required field.");
         } else {
             $("#name").css("border-color", "");
+            $("#tour").css("border-color", "");
             $("#image").css("border-color", "");
             $("#description").css("border-color", "");
             $('#error_name').css('opacity', 0);

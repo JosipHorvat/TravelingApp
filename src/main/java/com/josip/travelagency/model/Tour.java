@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,15 +22,17 @@ public class Tour extends MainEntity{
 
     public Tour (){
        setTourDetails(new TourDetails());
+
     }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tour_details_id")
     private TourDetails tourDetails;
 
-    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @OneToMany( cascade = CascadeType.ALL,  orphanRemoval = true)
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<Image> images;
 
 

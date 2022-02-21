@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.josip.travelagency.model.Image;
+import com.josip.travelagency.model.Tour;
 import com.josip.travelagency.repository.ImageRepository;
+import com.josip.travelagency.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -35,15 +37,20 @@ public class ImageController {
 
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private TourService tourService;
 
     @GetMapping(value = {"/image-home"})
-    public String addProductPage() {
+    public String addProductPage(Model model) {
+        List<Tour> tours = tourService.getAll();
+        model.addAttribute("tours", tours);
         return "image/image-form";
     }
 
     @PostMapping("/image/saveImageDetails")
     public @ResponseBody ResponseEntity<?> createProduct(@RequestParam("name") String name,
-                                                        @RequestParam("description") String description, Model model, HttpServletRequest request
+                                                        @RequestParam("description") String description,
+                                                         @RequestParam("tour") Tour tour, Model model, HttpServletRequest request
             ,final @RequestParam("image") MultipartFile file) {
         try {
             //String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
@@ -74,6 +81,7 @@ public class ImageController {
             image.setName(names[0]);
             image.setImage(imageData);
             image.setDescription(descriptions[0]);
+            image.setTour(tour);
             imageRepository.save(image);
 
             return new ResponseEntity<>("Product Saved With File - " + fileName, HttpStatus.OK);
@@ -103,6 +111,8 @@ public class ImageController {
                     model.addAttribute("id", image.get().getId());
                     model.addAttribute("description", image.get().getDescription());
                     model.addAttribute("name", image.get().getName());
+                    model.addAttribute("tour", image.get().getTour().getName());
+                    model.addAttribute("tourid", image.get().getTour().getId());
                     return "image/imagedetails";
                 }
                 return "redirect:/showOffer";
@@ -118,7 +128,10 @@ public class ImageController {
     String show(Model map) {
         List<Image> images = imageRepository.findAll();
         map.addAttribute("images", images);
+        System.out.println("U image show sam");
         return "image/images";
     }
+
+    //TODO: 21/02/2022  In list of tours image button needs to show all images of that tour. Image details need to have delete button to delete imageById
 }
 

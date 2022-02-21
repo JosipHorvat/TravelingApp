@@ -25,6 +25,9 @@ public class Image extends MainEntity{
     @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "tour_id")
+    private Tour tour;
 
     @Override
     public String toString() {
