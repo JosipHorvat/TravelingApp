@@ -16,6 +16,8 @@ public interface TourService {
 
     void addUserToTour(long id, String userId);
 
+     List<Tour> findByKeyword(String keyword);
+
 
 
 }

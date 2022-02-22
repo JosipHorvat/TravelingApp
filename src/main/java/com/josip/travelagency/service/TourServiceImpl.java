@@ -55,5 +55,9 @@ public class TourServiceImpl implements TourService{
         }
     }
 
+    public List<Tour> findByKeyword(String keyword){
+        return tourRepository.findByKeyword(keyword);
+    }
+
 
 }

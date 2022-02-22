@@ -16,6 +16,12 @@
         <h1>List of available tours</h1>
     </div>
 
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Tour Name & Duration" size="50" >
+        <button type="submit" class="btn btn-info" >Search</button>
+        <button type="submit" class="btn btn-info" >Reset</button>
+    </form>
+
     <div class="row">
         <table class="table table-hover" th:if="${!tours.empty}">
             <thead>

@@ -1,6 +1,7 @@
 package com.josip.travelagency.controllers;
 
 import com.josip.travelagency.model.Tour;
+import com.josip.travelagency.repository.TourRepository;
 import com.josip.travelagency.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,10 +37,17 @@ public class TourController {
         return "redirect:showOffer";
     }
 
-    @GetMapping("/showOffer")
-    public String getTours(Model model) {
-        List<Tour> tours = tourService.getAll();
-        model.addAttribute("tours", tours);
+    @GetMapping(path = {"/showOffer", "/search"})
+    public String getTours(Model model, Tour tour, String keyword) {
+
+        if(keyword!=null) {
+            List<Tour> tours = tourService.findByKeyword(keyword);
+            model.addAttribute("tours", tours);
+        }else {
+            List<Tour> tours = tourService.getAll();
+            model.addAttribute("tours", tours);
+            return "tour/tours";
+    }
         return "tour/tours";
     }
 
