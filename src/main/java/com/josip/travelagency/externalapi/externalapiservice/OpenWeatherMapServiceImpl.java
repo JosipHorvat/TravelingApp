@@ -26,6 +26,9 @@ public class OpenWeatherMapServiceImpl implements OpenWeatherMapService{
     @Override
     public OpenWeatherMap getData(HttpServletRequest request) {
 
+        // TODO: 22/02/2022  novi parametar u metodu koji ce se zvati String city te na slican nacin kao u trazilici dodaj taj string umjesto hardcoded city 
+        // TODO: 22/02/2022  lista slika po id od toura, tj na pritisak buttona images iz liste tour trebao bi dobiti slike samo od tog toura 
+        
         String ip = getIpAddress(request);
         //String city = getCity(ip);  Due to very low limit of  https://ipapi.co/ratelimited/ I am using hardcoded value
         String hardcodedCity = "Osijek";
