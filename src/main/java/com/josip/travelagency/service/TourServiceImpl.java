@@ -1,9 +1,11 @@
 package com.josip.travelagency.service;
 
+import com.josip.travelagency.exceptions.TourNotFoundException;
 import com.josip.travelagency.model.TAUser;
 import com.josip.travelagency.model.Tour;
 import com.josip.travelagency.repository.TAUserRepository;
 import com.josip.travelagency.repository.TourRepository;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +28,11 @@ public class TourServiceImpl implements TourService{
         return tourRepository.findAll();
     }
 
+    @SneakyThrows
     @Override
     public Tour getById(long id) {
-        return tourRepository.findById(id).get();
+        return tourRepository.findById(id)
+                .orElseThrow(() -> new TourNotFoundException(id));
     }
 
     @Override
