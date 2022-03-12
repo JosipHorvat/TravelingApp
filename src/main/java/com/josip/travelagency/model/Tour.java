@@ -2,6 +2,8 @@ package com.josip.travelagency.model;
 import static com.josip.travelagency.constants.TourErrorMessage.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,6 +15,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+@ToString
 @Getter
 @Setter
 @Entity
